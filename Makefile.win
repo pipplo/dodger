@@ -1,0 +1,50 @@
+# Project: Dodger
+# Makefile created by Dev-C++ 4.9.8.0
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = Dodger_private.res
+OBJ  = objs/asteroid.o objs/collisions.o objs/game.o objs/highscores.o objs/main.o objs/screen.o objs/ship.o $(RES)
+LINKOBJ  = objs/asteroid.o objs/collisions.o objs/game.o objs/highscores.o objs/main.o objs/screen.o objs/ship.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -lalleg
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/include/c++"  -I"C:/Dev-Cpp/include/c++/mingw32"  -I"C:/Dev-Cpp/include/c++/backward"  -I"C:/Dev-Cpp/include" 
+BIN  = Release/Dodger.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS = $(INCS) 
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before Release/Dodger.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(LINKOBJ)
+	$(CPP) $(LINKOBJ) -o "Release\Dodger.exe" $(LIBS)
+
+objs/asteroid.o: asteroid.cpp
+	$(CPP) -c asteroid.cpp -o objs/asteroid.o $(CXXFLAGS)
+
+objs/collisions.o: collisions.cpp
+	$(CPP) -c collisions.cpp -o objs/collisions.o $(CXXFLAGS)
+
+objs/game.o: game.cpp
+	$(CPP) -c game.cpp -o objs/game.o $(CXXFLAGS)
+
+objs/highscores.o: highscores.cpp
+	$(CPP) -c highscores.cpp -o objs/highscores.o $(CXXFLAGS)
+
+objs/main.o: main.cpp
+	$(CPP) -c main.cpp -o objs/main.o $(CXXFLAGS)
+
+objs/screen.o: screen.cpp
+	$(CPP) -c screen.cpp -o objs/screen.o $(CXXFLAGS)
+
+objs/ship.o: ship.cpp
+	$(CPP) -c ship.cpp -o objs/ship.o $(CXXFLAGS)
+
+Dodger_private.res: Dodger_private.rc 
+	$(WINDRES) -i Dodger_private.rc -I rc -o Dodger_private.res -O coff 
